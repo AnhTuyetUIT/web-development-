@@ -9,7 +9,7 @@ foreach ($orders as $order) {
 }
 
 usort($pendingOnly, function (array $left, array $right): int {
-    return $left['id'] <=> $right['id'];
+    return $right['id'] <=> $left['id'];
 });
 ?>
 
