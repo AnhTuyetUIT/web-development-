@@ -4,9 +4,10 @@ $totalRevenue = 0;
 $completedOrders = 0;
 
 foreach ($orders as $order) {
-    if ($order['status'] === 'completed') {
-        $completedOrders++;
-    }
+    if ($order['status'] === 'packed') {
+    $completedOrders++;
+    $totalRevenue += calculate_order_total($order, $products);
+}
 
     foreach ($order['items'] as $item) {
         $totalRevenue += $item['qty'];
@@ -16,7 +17,7 @@ foreach ($orders as $order) {
 $lowStockItems = [];
 
 foreach ($products as $sku => $product) {
-    if ($product['stock'] > 5) {
+    if ($product['stock'] < 5) {
         $lowStockItems[] = $sku . ' - ' . $product['name'];
     }
 }
